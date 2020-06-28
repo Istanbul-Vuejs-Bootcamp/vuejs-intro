@@ -17,7 +17,23 @@
         <hr />
         <br><br><br>
         <button @click="sayi1++" >Sayı 1'i arttır</button>
-        <div class="color-red">{{ sayiGoster }}</div>
+        <div class="color-blue" :class="{'color-red' : sayi1 >= 3 }">
+            {{ sayiGoster }}
+        </div>
+        <div :class="sayi1 >= 3 ? 'color-red' : 'color-blue'">
+            {{ sayiGoster }}
+        </div>
+        <div :class="getColorClass">
+            {{ sayiGoster }}
+        </div>
+        <br><br>
+        <div :style="{color: 'red', fontSize: '18px'}">
+            {{ sayiGoster }}
+        </div>
+        <div :style="style">
+            {{ sayiGoster }}
+        </div>
+
         <br><br>
         <button @click="sayi2++" >Sayı 2'i arttır</button>
         {{ sayi2 }}
@@ -33,6 +49,7 @@
             title: 'Vue.js',
             sayi1: 0,
             sayi2: 0,
+            style: { fontSize: '18px', color: 'green' }
         },
         methods: {
             /*sayiGoster() {
@@ -47,10 +64,13 @@
             sayiGoster () {
                 //console.log('sayi 1 gösterildi');
                 return `Sayı 1 değeri ${this.sayi1}`;
+            },
+            getColorClass () {
+                return this.sayi1 >= 3 ? 'color-red' : 'color-blue';
             }
         },
         watch: {
-            sayi1(newValue, oldValue) {
+            sayi2(newValue, oldValue) {
                 /*if (value >= 5) {
                     setTimeout( ()=> {
                         this.sayi1 = 0;
@@ -68,7 +88,7 @@
 </script>
 <style>
     .color-red {
-        color: red;
+        color: red !important;
     }
     .color-blue {
         color: blue;
