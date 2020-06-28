@@ -6,6 +6,10 @@
     <title>Title</title>
 </head>
 <body>
+<!--
+    eventleri v-on ile etkileşime geçiriyoruz örneğin v-on:click
+     attributeleri ise v-bind ile etkileşime geçiriyoruz
+-->
     <div id="app">
         <p>{{ selamla() }} {{ degisken }}</p>
         <p>
@@ -16,16 +20,40 @@
 
             <button v-on:click="sayi < 10 ? sayi += 5 : sayi++">Artır</button>
             <br><br>
-            <button v-on:click="arttir">Method ile artır</button>
+            <!-- v-on:click kısaltması @click'tir '@' v-on demektir -->
+            <button @click="arttir" :disabled="false">Method ile artır</button>
         </p>
+        <a v-bind:href="url">Link</a>
+
+        <!-- v-bind:src kısaltması :src'dir ':' v-bind demektir. -->
+        <img :src="img" :width="imageSize" />
+
+        <br><br>
+        <input @input="setText" /> {{ text }}
+
+        <br><br>
+        V-model ile kullanım
+        <input v-model="text2" /> {{ text2 }}
+
+    </div>
+
+
+    <br><br><br><br>
+    <div id="app2">
+        <button v-on:click="arttir">Yeni Vue Instance ile arttır</button>
     </div>
 </body>
 <script>
-    new Vue({
+    const app1 = new Vue({
         el: '#app',
         data: {
             degisken: 'Vue.js',
             sayi: 0,
+            url: 'http://www.google.com',
+            img: 'https://vuejs.org/images/logo.png',
+            imageSize: 40,
+            text: '',
+            text2: 'Selam',
         },
         methods: {
             selamla() {
@@ -36,6 +64,17 @@
             },
             arttir() {
                 this.sayi++;
+            },
+            setText(e) {
+                this.text = e.target.value;
+            }
+        }
+    });
+    const app2 = new Vue({
+        el: '#app2',
+        methods: {
+            arttir() {
+                app1.sayi++;
             }
         }
     });
