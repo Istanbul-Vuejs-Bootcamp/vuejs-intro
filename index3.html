@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="./methods.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <div id="app">
+        {{ inComingData }}
+    </div>
+
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            inComingData: sayHello(),
+        }
+    });
+</script>
+<script src="./methods.js" />
+</html>
