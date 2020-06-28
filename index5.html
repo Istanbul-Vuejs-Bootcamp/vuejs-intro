@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <div id="app">
+        <ul>
+            <li v-for="item in arr1">
+                {{ item }}
+            </li>
+        </ul>
+
+        <br>
+        <hr>
+        <br>
+
+        <ul>
+            <li v-for="item in arr2">
+                {{ item.name }}  {{ item.surname }}
+            </li>
+        </ul>
+    </div>
+
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+           arr1: [ 1,2,3,4,5 ],
+           arr2: [
+               { name: 'John', surname: 'Doe' },
+               { name: 'Micheal', surname: 'Jackson' },
+               { name: 'Kobe', surname: 'Braynt' },
+           ]
+        }
+    });
+</script>
+</html>

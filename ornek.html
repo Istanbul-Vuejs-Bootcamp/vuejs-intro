@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+
+    <input type="text"
+           v-model="formModel.name"
+           placeholder="please enter name" />
+
+    <input type="text"
+           v-model="formModel.surname"
+           placeholder="please enter surname" />
+    <button
+            @click="isUpdateMod ?
+            updateUser() : addNewUser()">{{ buttonText }}</button>
+
+    <ul>
+        <li v-for="user in users">
+           {{user.id}} {{ user.name }}  {{ user.surname }}
+            - <a href="#" @click="goToEdit(user)">Düzenle</a>
+        </li>
+    </ul>
+</div>
+
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            users: [
+                { id: 1, name: 'John', surname: 'Doe' },
+                { id: 2, name: 'Micheal', surname: 'Jackson' },
+                { id: 3, name: 'Kobe', surname: 'Braynt' },
+            ],
+            formModel: {
+                id: 0,
+                name: '',
+                surname: '',
+            },
+            isUpdateMod: false,
+        },
+        methods: {
+            addNewUser() {
+                this.formModel.id = this.users.length + 1; // id veriyorum
+
+                this.users.push(this.formModel);
+                this.clearForm();
+            },
+            goToEdit(user) {
+                this.formModel = {...user};
+                this.isUpdateMod = true;
+            },
+            updateUser() {
+               const index = this.users.findIndex((item) => item.id === this.formModel.id);
+               /*
+               * update ettiğimiz data güncellenmiyordu. Vue.set ile biz array'in değiştiğini ve yeni değerini vue'ya bildirdik.
+               * sorunun sebebine gelince biz update yaptığımızda array içerisindeki obje sayısı değişmiyor. (Yeni ekleme yapmıyoruz çünkü)
+               * Vue ARRAY SIZE'da değişiklik olmadığı için tekrardan RENDER ETMİYOR.... Biz vue.set ile etmesini istedik.
+               *
+               * ÇÖZÜM'e gelince array'in indeksinde datayı değiştirmek yerine array.splice ile datayı array'e aktarırsak array'deki değişimi
+               * vue otomatik algılayıp render ediyor. Örneği bu şekilde update ettim.
+               *
+               * */
+               //Vue.set(this.users, this.users[index] = { ...this.formModel });
+               this.users.splice(index, 1, { ...this.formModel });
+               this.isUpdateMod = false;
+               this.clearForm();
+            },
+            clearForm() {
+                this.formModel = {
+                    id: 0,
+                    name: '',
+                    surname: ''
+                }
+            }
+        },
+        computed: {
+            buttonText() {
+                return this.isUpdateMod ? 'Update' : 'Save';
+            }
+        }
+    });
+</script>
+</html>
