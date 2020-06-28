@@ -17,7 +17,7 @@
         <hr />
         <br><br><br>
         <button @click="sayi1++" >Sayı 1'i arttır</button>
-        {{ sayiGoster }}
+        <div class="color-red">{{ sayiGoster }}</div>
         <br><br>
         <button @click="sayi2++" >Sayı 2'i arttır</button>
         {{ sayi2 }}
@@ -57,7 +57,7 @@
                     }, 500)
                 }*/
 
-                console.log(`sayi1 yeni değeri: `, newVal);
+                console.log(`sayi1 yeni değeri: `, newValue);
                 console.log(`sayi1 eski değeri: `, oldValue);
                 setTimeout( ()=> {
                     this.sayi1 = 0;
@@ -66,4 +66,12 @@
         }
     });
 </script>
+<style>
+    .color-red {
+        color: red;
+    }
+    .color-blue {
+        color: blue;
+    }
+</style>
 </html>
