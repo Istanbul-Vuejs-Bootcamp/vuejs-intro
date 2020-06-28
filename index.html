@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app">
+        <p>{{ selamla() }} {{ degisken }}</p>
+        <p>
+            {{ yenidenSelamla() }}
+        </p>
+        <p>
+            {{ sayi }}
+
+            <button v-on:click="sayi < 10 ? sayi += 5 : sayi++">Artır</button>
+            <br><br>
+            <button v-on:click="arttir">Method ile artır</button>
+        </p>
+    </div>
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            degisken: 'Vue.js',
+            sayi: 0,
+        },
+        methods: {
+            selamla() {
+                return "Selam";
+            },
+            yenidenSelamla() {
+                return "Selam" + this.degisken;
+            },
+            arttir() {
+                this.sayi++;
+            }
+        }
+    });
+</script>
+</html>
