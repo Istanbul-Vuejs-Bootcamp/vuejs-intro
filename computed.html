@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <button @click="sayi1++">Sayı 1 arttır</button> {{ sayi1 }}
+    <br>
+    <button @click="sayi2++">Sayı 2 arttır</button> {{ sayi2 }}
+    <br><br>
+    Method ile {{ goster() }}<br><br>
+    Computed ile {{ gosterComputed }}
+</div>
+
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            sayi1: 0,
+            sayi2: 0,
+        },
+        methods: {
+            goster() {
+                console.log('goster methodu çalıştı');
+                return this.sayi1 < 18 ? 'Sayı 1 Reşit Değildir' : 'Sayı 1 Reşittir';
+            }
+        },
+        computed: {
+            gosterComputed() {
+                console.log('goster computed çalıştı');
+                return this.sayi2 < 18 ? 'Sayı 2 Reşit Değildir' : 'Sayı 2 Reşittir';
+            }
+        }
+    })
+</script>
+</html>

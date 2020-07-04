@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <button @click="changeToArray">Değiştir</button>
+    <br>
+    <button @click="changeToObject">Objeyi Değiştir</button>
+</div>
+
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            arr: [
+                { name: 'John', surname: 'Doe' },
+                { name: 'Kobe', surname: 'Braynt' }
+            ],
+            obj: {
+                name: 'Mustafa',
+                surname: 'Demir',
+            }
+        },
+        methods: {
+            changeToArray() {
+                this.arr[0].name = 'Johny' + Date.now();
+            },
+            changeToObject() {
+                this.obj.name = 'Murat' + Date.now();
+            }
+        },
+        watch: {
+            arr : {
+                handler(newValue) {
+                    console.log(newValue);
+                },
+                deep: true,
+            },
+            obj: {
+                handler(newValue) {
+                    console.log(newValue);
+                },
+                deep: true,
+            }
+        }
+    })
+</script>
+</html>
