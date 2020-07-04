@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    Sayı 1<br>
+    <input type="text" v-model.number="number1" />
+    <br><br>
+
+    Sayı2<br>
+    <input type="text" v-model.number="number2" />
+
+    <br><br>
+    <button @click="sum" :disabled="isTotalShowing"> Topla </button>
+    <br><br>
+    <button @click="isShow = !isShow" :class="isShow ? 'red' : 'green'">
+        {{ isShow ? 'Gizle' : 'Göster' }}
+    </button>
+
+    <p v-if="isTotalShowing">
+        {{ number1 }} + {{ number2 }} Result: {{ total }}
+    </p>
+
+    <ul v-if="isShow">
+        <li v-for="(log, logIndex) in logs"> {{logIndex + 1 }}. process - {{ log }} </li>
+    </ul>
+</div>
+
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            number1: 0,
+            number2: 0,
+            total: null,
+            logs: [],
+            isShow: true
+        },
+        methods: {
+            sum() {
+                this.total = this.number1 + this.number2;
+            },
+            reset() {
+                this.total = null;
+                this.number1 = 0;
+                this.number2 = 0;
+            }
+        },
+        watch: {
+            total(val) {
+                if(val != null) {
+                    this.logs.push(`${this.number1} + ${this.number2}. Result: ${this.total}`);
+                    setTimeout(() => {
+                        this.reset();
+                    }, 500);
+                }
+            }
+        },
+        computed: {
+            isTotalShowing() {
+                // return this.total !== null;
+                return this.total !== null ? true : false;
+            }
+        }
+    })
+</script>
+<style>
+    .red {
+        background-color: red;
+    }
+    .green {
+        background-color: green;
+    }
+</style>
+</html>
